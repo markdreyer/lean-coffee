@@ -9,7 +9,6 @@ class Timer extends Component {
       timer: null,
       counter: 0,
       initialCountdown: 10, //300,
-      decrement: 60,
       countdown: 0
     };
     this.tick = this.tick.bind(this);
@@ -97,8 +96,8 @@ class Timer extends Component {
 }
 
 function mapStateToProps(state) {
-  const { timerExpired, timer, decrement, countdown, counter } = state;
-  return { timerExpired, timer, decrement, countdown, counter };
+  const { timerExpired, timer, countdown, counter } = state;
+  return { timerExpired, timer, countdown, counter };
 }
 
 export default connect(mapStateToProps)(Timer);
