@@ -8,7 +8,7 @@ class Timer extends Component {
     this.state = {
       timer: null,
       counter: 0,
-      initialCountdown: 300,
+      initialCountdown: 10, //300,
       decrement: 60,
       countdown: 0
     };
@@ -18,16 +18,22 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    this.setState({ counter: this.state.initialCountdown });
+    this.setState({
+      counter: this.state.initialCountdown,
+      countdown: this.state.initialCountdown
+    });
   }
 
   componentWillUnmount() {
     this.stop();
   }
 
-  start() {
+  start(seconds) {
     let timer = setInterval(this.tick, 1000);
-    this.setState({ timer: timer, countdown: this.state.counter });
+    this.setState({
+      timer: timer,
+      counter: seconds || this.state.initialCountdown
+    });
   }
 
   stop() {
@@ -43,20 +49,19 @@ class Timer extends Component {
     this.stop();
     this.setState({
       counter: this.state.initialCountdown,
-      timerAlert: false,
+      timerExpired: false,
       forceNext: false,
       timer: undefined
     });
   }
 
   tick() {
-    let { counter, countdown, decrement } = this.state;
+    let { counter } = this.state;
     if (counter - 1 <= 0) {
       this.stop();
       this.setState({
         counter: 0,
-        timerAlert: true,
-        forceNext: countdown - decrement <= 0
+        timerExpired: true
       });
     } else {
       this.setState({
@@ -66,22 +71,34 @@ class Timer extends Component {
   }
 
   render() {
+    const { timer, countdown, timerExpired } = this.state;
+
     return (
       <>
         <h1>Seconds: {this.state.counter}</h1>
-        <button onClick={() => this.start()}>Start</button>
-
-        <button onClick={() => this.stop()}>Stop</button>
-
-        <button onClick={() => this.reset()}>Reset</button>
+        {!timerExpired && (
+          <div className="list-flex">
+            {timer && <button onClick={() => this.stop()}>Stop</button>}
+            {!timer && <button onClick={() => this.start()}>Start</button>}
+            <button onClick={() => this.reset()}>Reset</button>
+          </div>
+        )}
+        {timerExpired && (
+          <div className="list-flex">
+            <button onClick={() => this.start(countdown / 2)}>
+              {countdown / 2} More?
+            </button>
+            <button onClick={() => this.reset()}>Next Topic</button>
+          </div>
+        )}
       </>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { timerAlert, timer, decrement, countdown, counter } = state;
-  return { timerAlert, timer, decrement, countdown, counter };
+  const { timerExpired, timer, decrement, countdown, counter } = state;
+  return { timerExpired, timer, decrement, countdown, counter };
 }
 
 export default connect(mapStateToProps)(Timer);
