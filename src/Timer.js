@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Button } from "@material-ui/core";
+import "./Timer.css";
 
 class Timer extends Component {
   constructor(props) {
@@ -36,6 +38,8 @@ class Timer extends Component {
     });
 
     this.initAudio();
+    debugger;
+    window.deferredPrompt.prompt();
   }
 
   startSeconds(seconds) {
@@ -109,22 +113,39 @@ class Timer extends Component {
         <h1>{this.state.counter}</h1>
         {!timerExpired && (
           <div>
-            {timer && <button onClick={() => this.stop()}>Stop</button>}
-            {!timer && <button onClick={() => this.start()}>Start</button>}
-            <button onClick={() => this.reset()}>Next Topic</button>
+            {timer && (
+              <Button variant="contained" onClick={() => this.stop()}>
+                Stop
+              </Button>
+            )}
+            {!timer && (
+              <Button variant="contained" onClick={() => this.start()}>
+                Start
+              </Button>
+            )}
+            <Button variant="contained" onClick={() => this.reset()}>
+              Next Topic
+            </Button>
           </div>
         )}
         {timerExpired && (
           <div>
-            {timer && <button onClick={() => this.stop()}>Stop</button>}
+            {timer && (
+              <Button variant="contained" onClick={() => this.stop()}>
+                Stop
+              </Button>
+            )}
             {!timer && (
-              <button
+              <Button
+                variant="contained"
                 onClick={() => this.startSeconds(this.getNextCountdown())}
               >
                 {this.getNextCountdown()} More?
-              </button>
+              </Button>
             )}
-            <button onClick={() => this.reset()}>Next Topic</button>
+            <Button variant="contained" onClick={() => this.reset()}>
+              Next Topic
+            </Button>
           </div>
         )}
       </>
