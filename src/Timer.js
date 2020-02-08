@@ -27,13 +27,19 @@ class Timer extends Component {
     this.stop();
   }
 
-  start(seconds) {
+  start() {
+    let timer = setInterval(this.tick, 1000);
+    this.setState({
+      timer: timer
+    });
+  }
+
+  startSeconds(seconds) {
     let timer = setInterval(this.tick, 1000);
     this.setState({
       timer: timer,
-      counter: seconds || this.state.initialCountdown,
-      countdown: this.getNextCountdown(),
-      timerExpired: false
+      counter: seconds,
+      countdown: seconds
     });
   }
 
@@ -82,7 +88,7 @@ class Timer extends Component {
 
     return (
       <>
-        <h1>Seconds: {this.state.counter}</h1>
+        <h1>{this.state.counter}</h1>
         {!timerExpired && (
           <div className="list-flex">
             {timer && <button onClick={() => this.stop()}>Stop</button>}
@@ -92,8 +98,8 @@ class Timer extends Component {
         )}
         {timerExpired && (
           <div className="list-flex">
-            <button onClick={() => this.start(countdown)}>
-              {countdown} More?
+            <button onClick={() => this.startSeconds(this.getNextCountdown())}>
+              {this.getNextCountdown()} More?
             </button>
             <button onClick={() => this.reset()}>Next Topic</button>
           </div>
