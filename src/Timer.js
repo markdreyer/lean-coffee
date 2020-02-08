@@ -8,7 +8,7 @@ class Timer extends Component {
     this.state = {
       timer: null,
       counter: 0,
-      initialCountdown: 12, //300,
+      initialCountdown: 480,
       countdown: 0
     };
     this.tick = this.tick.bind(this);
@@ -85,7 +85,7 @@ class Timer extends Component {
   }
 
   render() {
-    const { timer, countdown, timerExpired } = this.state;
+    const { timer, timerExpired } = this.state;
 
     return (
       <>
