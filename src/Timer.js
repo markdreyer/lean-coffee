@@ -38,8 +38,6 @@ class Timer extends Component {
     });
 
     this.initAudio();
-    debugger;
-    window.deferredPrompt.prompt();
   }
 
   startSeconds(seconds) {
