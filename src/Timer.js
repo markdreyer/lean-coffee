@@ -66,7 +66,12 @@ class Timer extends Component {
   }
 
   render() {
-    return <h1>Seconds: {this.state.counter}</h1>;
+    return(
+    <>
+      <h1>Seconds: {this.state.counter}</h1>
+      <button onClick={() => this.start()}>Start</button>
+    </>
+    );
   }
 }
 
