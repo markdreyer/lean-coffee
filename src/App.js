@@ -4,12 +4,11 @@ import Timer from "./Timer";
 
 function App() {
   return (
-      <div className="App">
-        <header className="App-header">
-          <Timer></Timer>
-          <button>Do Stuff</button>
-        </header>
-      </div>
+    <div className="App">
+      <header className="App-header">
+        <Timer></Timer>
+      </header>
+    </div>
   );
 }
 
