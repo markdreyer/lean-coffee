@@ -8,12 +8,14 @@ class Timer extends Component {
     this.state = {
       timer: null,
       counter: 0,
-      initialCountdown: 480,
+      initialCountdown: 12, //480,
       countdown: 0
     };
     this.tick = this.tick.bind(this);
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
+
+    this.buzzer = undefined;
   }
 
   componentDidMount() {
@@ -32,6 +34,8 @@ class Timer extends Component {
     this.setState({
       timer: timer
     });
+
+    this.initAudio();
   }
 
   startSeconds(seconds) {
@@ -67,6 +71,7 @@ class Timer extends Component {
     let { counter } = this.state;
     if (counter - 1 <= 0) {
       this.stop();
+      this.playAudio();
       this.setState({
         counter: 0,
         timerExpired: true
@@ -82,6 +87,18 @@ class Timer extends Component {
     let minCountDown = this.state.initialCountdown / 4;
     let nextCountDown = this.state.countdown / 2;
     return nextCountDown <= minCountDown ? minCountDown : nextCountDown;
+  }
+
+  // Chrome requires user action to play sound so
+  // we must call .play() on a user action to initialize
+  initAudio() {
+    this.buzzer = new Audio("buzz.mp3");
+    this.buzzer.muted = true;
+    this.buzzer.play();
+  }
+  playAudio() {
+    this.buzzer.muted = false;
+    this.buzzer.play();
   }
 
   render() {
