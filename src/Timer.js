@@ -44,8 +44,16 @@ class Timer extends Component {
     this.setState({
       timer: timer
     });
-
     this.initAudio();
+
+    // Resume/Start animation
+    var shadeStyle = document.querySelector("#shade").style;
+
+    if (shadeStyle.webkitAnimationPlayState !== "paused") {
+      shadeStyle.animation = `drainit ${this.state.counter}s ease-in forwards`;
+    } else {
+      shadeStyle.webkitAnimationPlayState = "running";
+    }
   }
 
   startSeconds(seconds) {
@@ -56,6 +64,9 @@ class Timer extends Component {
       countdown: seconds,
       timerExpired: false
     });
+
+    document.querySelector("#shade").style.animation =
+      "stopanimation 1s ease-in forwards";
   }
 
   stop() {
@@ -65,6 +76,8 @@ class Timer extends Component {
     this.setState({
       timer: undefined
     });
+
+    document.querySelector("#shade").style.webkitAnimationPlayState = "paused";
   }
 
   reset() {
@@ -75,6 +88,8 @@ class Timer extends Component {
       timerExpired: false,
       timer: undefined
     });
+    document.querySelector("#shade").style.animation =
+      "stopanimation 1s ease-in forwards";
   }
 
   tick() {

@@ -12,7 +12,8 @@ function App() {
       <main>
         <h3>Lean Coffee Timer</h3>
         <div className="cup-container">
-          <img id="cup" alt="Coffee Cup" src="cup.png" height="0"></img>
+          <span id="shade"></span>
+          <img id="cup" alt="Coffee Cup" src="cup.png"></img>
         </div>
         <Timer></Timer>
       </main>

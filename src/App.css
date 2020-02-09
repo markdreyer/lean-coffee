@@ -31,7 +31,7 @@ footer {
   position: relative;
   overflow: hidden;
 }
-.cup-container::before {
+.cup-container #shade {
   content: "";
   position: absolute;
   background: #282c34; /*debug  #04acff; */
@@ -39,7 +39,6 @@ footer {
   top: 0;
   height: 100%;
   animation: fillerup 3s ease-out forwards;
-  animation-delay: 1000ms;
 }
 img#cup {
   height: 40vh;
@@ -51,5 +50,23 @@ img#cup {
 
   to {
     height: 0;
+  }
+}
+@keyframes stopanimation {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 0;
+  }
+}
+@keyframes drainit {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
   }
 }
