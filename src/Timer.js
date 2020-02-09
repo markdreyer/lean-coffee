@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
+import PlayArrow from "@material-ui/icons/PlayArrow";
+import ArrowForward from "@material-ui/icons/ArrowForward";
+import AddIcon from "@material-ui/icons/Add";
+import StopIcon from "@material-ui/icons/Stop";
 import "./Timer.css";
 import moment from "moment";
 
@@ -121,6 +125,7 @@ class Timer extends Component {
                 variant="contained"
                 onClick={() => this.stop()}
               >
+                <StopIcon className="extendedIcon"></StopIcon>
                 Stop
               </Button>
             )}
@@ -130,6 +135,7 @@ class Timer extends Component {
                 variant="contained"
                 onClick={() => this.start()}
               >
+                <PlayArrow className="extendedIcon"></PlayArrow>
                 Start
               </Button>
             )}
@@ -138,6 +144,7 @@ class Timer extends Component {
               variant="contained"
               onClick={() => this.reset()}
             >
+              <ArrowForward className="extendedIcon"></ArrowForward>
               Next Topic
             </Button>
           </div>
@@ -150,6 +157,7 @@ class Timer extends Component {
                 variant="contained"
                 onClick={() => this.stop()}
               >
+                <StopIcon className="extendedIcon"></StopIcon>
                 Stop
               </Button>
             )}
@@ -159,6 +167,7 @@ class Timer extends Component {
                 variant="contained"
                 onClick={() => this.startSeconds(this.getNextCountdown())}
               >
+                <AddIcon className="extendedIcon"></AddIcon>
                 {moment.duration(this.getNextCountdown(), "s").format("m")}{" "}
                 More?
               </Button>
@@ -168,6 +177,7 @@ class Timer extends Component {
               variant="contained"
               onClick={() => this.reset()}
             >
+              <ArrowForward className="extendedIcon"></ArrowForward>
               Next Topic
             </Button>
           </div>

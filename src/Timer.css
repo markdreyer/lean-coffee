@@ -1,3 +1,10 @@
 button.MuiButton-contained {
   margin: 15px;
 }
+.extendedIcon {
+  margin-right: 5px;
+}
+
+button.MuiButtonBase-root {
+  padding-left: 5px;
+}
