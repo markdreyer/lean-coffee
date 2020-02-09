@@ -49,13 +49,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-let deferredPrompt;
-
-      window.addEventListener("beforeinstallprompt", e => {
-        // Stash the event so it can be triggered later.
-        e.prompt();
-        window.deferredPrompt = e;
-      });
     </script>
   </body>
 </html>

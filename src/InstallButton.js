@@ -1,16 +1,34 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 import GetApp from "@material-ui/icons/GetApp";
+import "./InstallButton.css";
 
 class InstallButton extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      canInstall: null
+    };
+    this.addToHomeScreen = this.addToHomeScreen.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener("beforeinstallprompt", event => {
+      // Stash the event so it can be triggered later.
+      this.setState({ canInstall: event });
+    });
+  }
+
   addToHomeScreen() {
-    if (window.deferredPrompt) {
-      window.deferredPrompt.prompt();
+    if (this.state.canInstall) {
+      this.state.canInstall.prompt();
       // Wait for the user to respond to the prompt
-      window.deferredPrompt.userChoice.then(choiceResult => {
+      this.state.canInstall.userChoice.then(choiceResult => {
         if (choiceResult.outcome === "accepted") {
           console.log("User accepted the A2HS prompt");
-          window.deferredPrompt = null;
+          this.setState = {
+            canInstall: null
+          };
         } else {
           console.log("User dismissed the A2HS prompt");
         }
@@ -20,9 +38,17 @@ class InstallButton extends Component {
 
   render() {
     return (
-      <Button variant="contained" onClick={() => this.addToHomeScreen()}>
-        <GetApp></GetApp>&nbsp; Install
-      </Button>
+      <>
+        {this.state.canInstall && (
+          <Button
+            id="install-button"
+            variant="contained"
+            onClick={() => this.addToHomeScreen()}
+          >
+            <GetApp></GetApp>&nbsp; Install
+          </Button>
+        )}
+      </>
     );
   }
 }
