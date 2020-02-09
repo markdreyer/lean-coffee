@@ -81,7 +81,7 @@ class Timer extends Component {
     let { counter } = this.state;
     if (counter - 1 <= 0) {
       this.stop();
-      this.playAudio();
+      this.buzz();
       this.setState({
         counter: 0,
         timerExpired: true
@@ -106,10 +106,13 @@ class Timer extends Component {
     this.buzzer.muted = true;
     this.buzzer.play();
   }
-  playAudio() {
+
+  buzz() {
     this.buzzer.muted = false;
     this.buzzer.play();
+    window.navigator.vibrate(2000);
   }
+
   render() {
     const { timer, timerExpired } = this.state;
 
