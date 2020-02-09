@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
 import "./Timer.css";
+import moment from "moment";
 
 class Timer extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Timer extends Component {
     this.state = {
       timer: null,
       counter: 0,
-      initialCountdown: 12, //480,
+      initialCountdown: 480,
       countdown: 0
     };
     this.tick = this.tick.bind(this);
@@ -18,6 +19,9 @@ class Timer extends Component {
     this.stop = this.stop.bind(this);
 
     this.buzzer = undefined;
+
+    var momentDurationFormatSetup = require("moment-duration-format");
+    momentDurationFormatSetup(moment);
   }
 
   componentDidMount() {
@@ -102,13 +106,13 @@ class Timer extends Component {
     this.buzzer.muted = false;
     this.buzzer.play();
   }
-
   render() {
     const { timer, timerExpired } = this.state;
 
     return (
       <>
-        <h1>{this.state.counter}</h1>
+        <h1>{moment.duration(this.state.counter, "s").format("m:ss")}</h1>
+
         {!timerExpired && (
           <div>
             {timer && (
@@ -155,7 +159,8 @@ class Timer extends Component {
                 variant="contained"
                 onClick={() => this.startSeconds(this.getNextCountdown())}
               >
-                {this.getNextCountdown()} More?
+                {moment.duration(this.getNextCountdown(), "s").format("m")}{" "}
+                More?
               </Button>
             )}
             <Button
