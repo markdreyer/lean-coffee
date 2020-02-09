@@ -34,7 +34,7 @@ footer {
 .cup-container::before {
   content: "";
   position: absolute;
-  background: #04acff;
+  background: #282c34; /*debug  #04acff; */
   width: 100%;
   top: 0;
   height: 100%;
