@@ -10,6 +10,7 @@ function App() {
         <InstallButton></InstallButton>
       </header>
       <main>
+        <h3>Lean Coffee Timer</h3>
         <Timer></Timer>
       </main>
       <footer></footer>
