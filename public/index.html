@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
+    <meta
+      http-equiv="origin-trial"
+      content="AhRr7gJxwtwb9WfL+pcIwyeVBrEYqnu1RHlJuNCWAKMXjbdbKcycQy4xKCZynMWIaDykBgnwqFUrOdiUoJb37wQAAABfeyJvcmlnaW4iOiJodHRwczovL2xlYW4tY29mZmVlLmF6dXJld2Vic2l0ZXMubmV0OjQ0MyIsImZlYXR1cmUiOiJXYWtlTG9jayIsImV4cGlyeSI6MTU4NDg1MTA0Nn0="
+    />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -26,7 +31,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
     />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -41,14 +49,40 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script>
+    <script async>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker.register("/service-worker.js");
+        });
+      }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
-}
+      // The wake lock sentinel.
+      let wakeLock = null;
+      // Function that attempts to request a wake lock.
+      const requestWakeLock = async () => {
+        try {
+          wakeLock = await navigator.wakeLock.request("screen");
+          wakeLock.addEventListener("release", () => {
+            console.log("Wake Lock was released");
+          });
+          console.log("Wake Lock is active");
+        } catch (err) {
+          console.error(`${err.name}, ${err.message}`);
+        }
+      };
 
+      // Request a wake lock…
+      requestWakeLock();
+
+      // Handle screen rotations and tab switching
+      const handleVisibilityChange = () => {
+        if (wakeLock !== null && document.visibilityState === "visible") {
+          requestWakeLock();
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      document.addEventListener("fullscreenchange", handleVisibilityChange);
     </script>
   </body>
 </html>
