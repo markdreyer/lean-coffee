@@ -1,0 +1,10 @@
+@media all and (display-mode: standalone) {
+  #install-button {
+    display: none;
+  }
+}
+@media only screen and (max-device-width: 480px) {
+  #install-button {
+    display: block;
+  }
+}

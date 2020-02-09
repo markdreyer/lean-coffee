@@ -112,16 +112,28 @@ class Timer extends Component {
         {!timerExpired && (
           <div>
             {timer && (
-              <Button variant="contained" onClick={() => this.stop()}>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() => this.stop()}
+              >
                 Stop
               </Button>
             )}
             {!timer && (
-              <Button variant="contained" onClick={() => this.start()}>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() => this.start()}
+              >
                 Start
               </Button>
             )}
-            <Button variant="contained" onClick={() => this.reset()}>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={() => this.reset()}
+            >
               Next Topic
             </Button>
           </div>
@@ -129,19 +141,28 @@ class Timer extends Component {
         {timerExpired && (
           <div>
             {timer && (
-              <Button variant="contained" onClick={() => this.stop()}>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() => this.stop()}
+              >
                 Stop
               </Button>
             )}
             {!timer && (
               <Button
+                color="primary"
                 variant="contained"
                 onClick={() => this.startSeconds(this.getNextCountdown())}
               >
                 {this.getNextCountdown()} More?
               </Button>
             )}
-            <Button variant="contained" onClick={() => this.reset()}>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={() => this.reset()}
+            >
               Next Topic
             </Button>
           </div>
