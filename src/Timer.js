@@ -123,9 +123,10 @@ class Timer extends Component {
               <Button
                 color="primary"
                 variant="contained"
+                size="large"
+                startIcon={<StopIcon />}
                 onClick={() => this.stop()}
               >
-                <StopIcon className="extendedIcon"></StopIcon>
                 Stop
               </Button>
             )}
@@ -133,18 +134,20 @@ class Timer extends Component {
               <Button
                 color="primary"
                 variant="contained"
+                size="large"
+                startIcon={<PlayArrow />}
                 onClick={() => this.start()}
               >
-                <PlayArrow className="extendedIcon"></PlayArrow>
                 Start
               </Button>
             )}
             <Button
               color="primary"
               variant="contained"
+              size="large"
+              startIcon={<ArrowForward />}
               onClick={() => this.reset()}
             >
-              <ArrowForward className="extendedIcon"></ArrowForward>
               Next Topic
             </Button>
           </div>
@@ -155,9 +158,10 @@ class Timer extends Component {
               <Button
                 color="primary"
                 variant="contained"
+                size="large"
+                startIcon={<StopIcon />}
                 onClick={() => this.stop()}
               >
-                <StopIcon className="extendedIcon"></StopIcon>
                 Stop
               </Button>
             )}
@@ -165,9 +169,10 @@ class Timer extends Component {
               <Button
                 color="primary"
                 variant="contained"
+                size="large"
+                startIcon={<AddIcon />}
                 onClick={() => this.startSeconds(this.getNextCountdown())}
               >
-                <AddIcon className="extendedIcon"></AddIcon>
                 {moment.duration(this.getNextCountdown(), "s").format("m")}{" "}
                 More?
               </Button>
@@ -175,9 +180,10 @@ class Timer extends Component {
             <Button
               color="primary"
               variant="contained"
+              size="large"
+              startIcon={<ArrowForward />}
               onClick={() => this.reset()}
             >
-              <ArrowForward className="extendedIcon"></ArrowForward>
               Next Topic
             </Button>
           </div>

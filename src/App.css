@@ -10,3 +10,26 @@
 header {
   text-align: right;
 }
+footer,
+footer a,
+footer a:visited {
+  color: #383e49;
+  font-size: x-small;
+}
+footer {
+  position: fixed;
+  bottom: 5px;
+  width: 100%;
+  z-index: 1;
+}
+@media (orientation: landscape) {
+  .responsive {
+    max-height: 100px;
+  }
+}
+@media (orientation: portrait) {
+  .responsive {
+    max-width: 25%;
+    height: auto;
+  }
+}
