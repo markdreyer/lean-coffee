@@ -11,7 +11,9 @@ function App() {
       </header>
       <main>
         <h3>Lean Coffee Timer</h3>
-        <img src="cup.png" className="responsive"></img>
+        <div className="cup-container">
+          <img id="cup" alt="Coffee Cup" src="cup.png" height="0"></img>
+        </div>
         <Timer></Timer>
       </main>
       <footer>

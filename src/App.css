@@ -10,6 +10,9 @@
 header {
   text-align: right;
 }
+main h3 {
+  margin: 10px 0 0 0;
+}
 footer,
 footer a,
 footer a:visited {
@@ -20,16 +23,33 @@ footer {
   position: fixed;
   bottom: 5px;
   width: 100%;
-  z-index: 1;
 }
-@media (orientation: landscape) {
-  .responsive {
-    max-height: 100px;
+
+.cup-container {
+  width: 100vw;
+  height: 40vh;
+  position: relative;
+  overflow: hidden;
+}
+.cup-container::before {
+  content: "";
+  position: absolute;
+  background: #04acff;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  animation: fillerup 3s ease-out forwards;
+  animation-delay: 1000ms;
+}
+img#cup {
+  height: 40vh;
+}
+@keyframes fillerup {
+  from {
+    height: 100%;
   }
-}
-@media (orientation: portrait) {
-  .responsive {
-    max-width: 25%;
-    height: auto;
+
+  to {
+    height: 0;
   }
 }
